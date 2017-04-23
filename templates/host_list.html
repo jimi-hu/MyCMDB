@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <form action="">
-        
+
         </form>
       </div>
 
@@ -33,7 +33,7 @@
         <h4 class="modal-title">新增主机</h4>
       </div>
       <div class="modal-body">
-<form active="/hosts/hostlist/" class="form-horizontal" method="POST">
+   <form active="/hosts/hostlist/" class="form-horizontal" method="POST">
   <div class="form-group">
     <label  class="col-sm-2 control-label">IP地址</label>
     <div class="col-sm-10">
@@ -72,6 +72,32 @@
     </div>
   </div>
 </div>
+
+<div  class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">删除主机</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/hosts/del/" method="POST" >
+          <div class="form-group text-center">
+            <label >你要删除的IP是:</label>
+            <input id="del-host" class="alert alert-warning text-center "  disabled name="delhost">
+          </div>
+          <div class="form-group">
+          <button type="submit"  class="btn btn-danger col-sm-offset-3 col-sm-2">确定</button>
+          <button   class="btn btn-success col-sm-offset-2 col-sm-2" data-dismiss="modal">取消</button>
+          </div>
+        </form>
+      </div>
+     <div class="modal-footer">
+     </div> 
+    </div>
+  </div>
+</div>
+
 <div style="height:80px">
   <ol class="breadcrumb">
   <li><a href="">资源</a></li>
@@ -92,7 +118,6 @@
 
   
 {% for host in  hosts %}
-
   <tr>
     <td><input type="checkbox"></td>
     <td>{{ host.ip }}</td>
@@ -102,12 +127,27 @@
     <td>{{ host.state }}</td>
     <td>
       <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#change" data-backdrop="static">编辑</button>
-      <button class="btn btn-danger btn-xs">删除</button>
+      <button id="{{  host.ip }}" class="btn btn-danger btn-xs del-btn" data-toggle="modal" data-target="#del" data-backdrop="static">删除</button>
     </td>
   </tr>
-  
 {% endfor %}
 </table>
+<ul class="pagination">
+        {% if hosts.has_previous %}
+        <li><a href="/hosts/hostlist/{{hosts.previous_page_number}}">&laquo</a></li>
+        {% endif %}
+        {% for num in hosts.paginator.page_range %}
+          {% if num == hosts.number %}
+         <li class="disabled" ><a href="/hosts/hostlist/{{num}}/">{{num}}</a></li>
+          {% else %}
+          <li ><a href="/hosts/hostlist/{{num}}/">{{num}}</a></li>
+          {% endif %}
+         {% endfor %}
+          {% if hosts.has_next %}
+              <li><a href="/hosts/hostlist/{{hosts.next_page_number}}/">&raquo</a></li>
+          {% endif %}
+</ul>
+
 
 {{ error }}
 

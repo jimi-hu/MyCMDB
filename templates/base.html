@@ -40,20 +40,20 @@
             资源
             <span class="caret" class="text-right"></span>
                </a>
-            <ul class="sub-menu-list server">
+            <ul class="sub-menu-list server" style="display:none;list-style-type:none">
               <li><a href="##">资源树</a></li>  
               <li><a href="/hosts/hostlist/">主机列表</a></li>  
               <li><a href="##">服务列表</a></li>  
             </ul>
         </li>  
-        <li class="h4 text-center"><a href="#" >资讯</a></li> 
-        <li class="h4 text-center" ><a href="#">产品</a></li> 
+        <li class="h4 text-center"><a href="#" >用户</a></li> 
+        <li class="h4 text-center" ><a href="#">流程</a></li> 
         <li class="dropdown h4 text-center" >
                <a  href="##" data-toggle="dropdown" class="text-center down">
             下拉菜单
             <span class="caret" class="text-right"></span>
                </a>
-              <ul class="nav ">
+              <ul class="nav " style="display:none">
             <li><a href="##">1</a></li>  
             <li><a href="##">2</a></li>  
             <li><a href="##">3</a></li>  
@@ -73,7 +73,11 @@ $(document).ready(function(){
  $(".down").click(function(){
     $(this).siblings("ul").fadeToggle();
   });
+ $(".del-btn").click(function(){
+	 $("#del-host").val(this.id);
+ });
 });
+
 </script>
 </body>
 </html>
