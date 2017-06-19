@@ -19,5 +19,6 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hosts/',include('host.urls')),
+    url(r'^deploy/',include('install.urls')),
     url(r'^$',views.index),
 ]

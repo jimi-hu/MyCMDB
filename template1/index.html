@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>运维管理</title>
+    <title>bootstrap页面样例</title>
     
     <!-- Bootstrap css -->
     <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap_noresponsive.css" rel="stylesheet">
     <link href="https://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
     
     <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
-    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
     <!--[if lt IE 9]>
     <script src="https://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script>
@@ -27,7 +27,7 @@
                 <div class="navbar-header pull-left">
                     <a class="navbar-brand" href="#">
                         <i class="fa fa-leaf"></i>
-                        运维管理
+                        bootstrap
                     </a>
                 </div>
                 
@@ -51,13 +51,13 @@
         <div class="sidebar-inner">
             <ul class="navi">
                 <li class="current active">
-                    <a href="/">
+                    <a href="index.html">
                         <i class="fa fa-gear"></i>首页
                     </a>
                 </li>
                 <li class="has_submenu">
                     <a href="javascript:;">
-                        <i class="fa fa-tasks"></i>表单
+                        <i class="fa fa-wrench"></i>表单
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                     </a>
                     <ul class="sub-menu">
@@ -74,29 +74,15 @@
                 </li>
                 <li class="has_submenu">
                     <a href="javascript:;">
-                        <i class="fa fa-desktop"></i>资源
+                        <i class="fa fa-tasks"></i>表格
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="/hosts/hostlist/">主机列表<i class="fa fa-chevron-right pull-right"></i></a>
+                            <a href="table1.html">表格一<i class="fa fa-chevron-right pull-right"></i></a>
                         </li>
                         <li>
                             <a href="table2.html">表格二<i class="fa fa-chevron-right pull-right"></i></a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has_submenu">
-                    <a href="javascript:;">
-                        <i class="fa fa-wrench"></i>发布
-                        <span class="pull-right"><i class="fa fa-angle-down"></i></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="/deploy/index/">功能模块<i class="fa fa-chevron-right pull-right"></i></a>
-                        </li>
-                        <li>
-                            <a href="table2.html">历史记录<i class="fa fa-chevron-right pull-right"></i></a>
                         </li>
                     </ul>
                 </li>
@@ -114,10 +100,8 @@
             </ul>
         </div>
     </div>
-
     <div class="king-main-container">
         <div class="container-fluid">
-        {% block body  %}
             <div class="row">
                 <div class="col-sm-3">
                     <!-- 样例 Start -->
@@ -340,10 +324,8 @@
                     </div>
                 </div>
             </div>
-       {% endblock body %}
         </div>
     </div>
-
 
 </div>
 
@@ -354,74 +336,7 @@
 
 <script src="https://o.qcloud.com/static_api/v3/bk/js/bk.js"></script>
 
-<script src="/static/js/index.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#table_demo2').find('input[name="checkall"]').click(function(){
-            var checked = $(this).prop('checked');
-            $('#table_demo2>tbody input').prop('checked', checked);
-        });
-        $('#table_demo2').find(':checkbox').on('click', function(){
-            if(!this.checked){
-                $('#table_demo2').find('input[name="checkall"]').prop('checked',false);
-            }
-        });
-        $('#table_demo2').find('.glyphicon-remove').parent('button').click(function(){
-            if(confirm('确定要删除？')){
-                $(this).closest('tr').remove();
-            }
-        });
-        $('#deleteAll').click(function(event) {
-            var records = $('#table_demo2>tbody input:checked').closest('tr');
-            if (!records.length){
-                alert('请选择要删除的记录！');
-                return false;
-            }
-            if(confirm('确定要删除？')){
-                records.remove();
-            }
-        });
-         $(".del-btn").click(function(){
-             $("#del-host").val(this.id);
-         });
-         $(".change-btn").click(function(){
-             $(".modal-title").html("修改主机信息");
-             $(".ip_address").val($(this).parent().siblings(".tab_ip").text())
-         });
-         $(".add-btn").click(function(){
-             $(".modal-title").html("添加主机");
-         });
-         $("#add-host-btn").click(function(){
-        	    $.ajax({
-        	        type: "POST",
-        	       url: "/hosts/hostlist/",
-        	       dataType: "json",
-        	       data: {
-        	           ip: $("#add-ip").val(),
-        	           port: $("#add-port").val(),
-        	           username: $("#add-username").val(),
-        	           passwd: $("#add-passwd").val(),
-        	        },
-        	    });
-         });
-         $("#playbook-file-input").change(function(){
-        	
-        	var file= this.files[0];
-        	var v="k";
-        	var fileSize=file.size;
-        	if (file){
-        		$("#playbook-file-name").text(file.name);
-        		if (file.size>1024){
-        			v="m";
-        			fileSize= file.size/1048576 ;
-        		    fileSize=fileSize.toFixed(2);
-        		}
-        		$("#playbook-file-size").text(fileSize+v); 
-        	}
-         });
-    });    
-</script>
-
+<script src="./js/index.js"></script>
 
 
 </body>
