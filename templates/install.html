@@ -1,31 +1,36 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10" style="width: 10%;">
-    60%
-  </div>
-</div>
-
-<form enctype="multipart/form-data" action="/deploy/upload/" method="post" >  
-
-   <input  type="file" name="playbook" id="playbook-file-input" />  
+  <button class="btn btn-success btn-xs" id="playbook-add" >新增脚本</button>
+   <input  type="file" name="playbook" id="playbook-file-input" style="display:none"/>  
 
    </br>
-   <input type="submit" class="btn btn-success btn-xs" value="上传包" />  
-   <span  id="playbook-file-name"></span>
-   <span  id="playbook-file-size"></span>
-</form>  
-<table>
-  <tr>
-    <th>Column 1 Heading</th>
-    <th><div class="progress">
-    <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
-</div>
-    </th>
-  </tr>
-</table>
+   <input type="submit" class="btn btn-success btn-xs" id="playbook-file-btn" value="上传包"  style="display:none"/>  
 
-<div class="progress">
-    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-</div>
+ <table class="table table-bordered " style="display:none" id="playbook-file-tb" >
+                      <thead>
+                          <tr>
+                            <th style="width: 30px">包名</th>
+                            <th style="width: 30px">大小</th>
+                            <th style="width: 100px">进度</th>
+                            <th style="width:20px"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td><span  id="playbook-file-name"></span></td>
+                        <td><span  id="playbook-file-size"></span></td>
+                        <td>
+                          <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-success" id="playbook-upload-pro" style="width: 0%"></div>
+                          </div>
+                        </td>
+                      </tr>
+  </table>
+  </br>
+
+{% for dir in playbook_list %}  
+<button id="{{ dir }}" class="btn btn-success btn-primary">{{ dir }}</button>
+{% endfor %}
+                      
+
 {% endblock body  %}

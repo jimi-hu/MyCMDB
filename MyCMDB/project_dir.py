@@ -6,4 +6,4 @@ Created on 2017年6月4日
 '''
 import os
 PROJECT_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print PROJECT_DIR
+#print PROJECT_DIR
