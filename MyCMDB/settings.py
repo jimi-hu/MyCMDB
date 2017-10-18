@@ -24,7 +24,7 @@ SECRET_KEY = '^ka*+$k#_uitxup&5ghhs%*wer%y1-7&qi(uap*p%knz4g8&ng'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.20.128"]
 
 
 # Application definition
@@ -81,8 +81,11 @@ DATABASES = {
          'NAME': 'CMDB',
          'USER':'root',
          'PASSWORD':'',
-         'HOST':'127.0.0.1',
+         'HOST':'localhost',
         'PORT':'3306',
+        'OPTIONS':{
+                   "unix_socket": "/tmp/mysql_3306.sock" , 
+                   },
     }
 }
 

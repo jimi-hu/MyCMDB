@@ -5,7 +5,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from common import inventory
 from MyCMDB.project_dir import  PROJECT_DIR
 import json
-
+import re
 # Create your views here.
 def del_host(request):
     if request.method == "POST":
@@ -33,8 +33,10 @@ def host_list(request,current_page):
             except Exception,e:
                 rc=1
                 
+            print result
             if (rc==0):
-                res=json.loads(result["contacted"][ip]["stdout"])
+                result=re.findall('{"mem.*}',result["contacted"][ip]["stdout"])[0]
+                res=json.loads(result)
                 mem=res["mem"]
                 cpu=res["cpu"]
                 hostname=res["hostname"]
