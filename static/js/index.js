@@ -6,18 +6,18 @@ $(function() {
         var sunMenu = $(this).next("ul");
  
         if (menu.hasClass("open")) {
-            sunMenu.slideUp(350,function(){
+            sunMenu.slideUp(50,function(){
                 menu.removeClass("open");
             });
             
         } else {
-            $(".navi > li > ul").slideUp(350);
+            $(".navi > li > ul").slideUp(50);
             
             setTimeout(function(){
                 $(".navi > li").removeClass("open");
-                sunMenu.slideDown(350);
+                sunMenu.slideDown(50);
                 menu.addClass("open");
-            },350);
+            },50);
             
         }
 

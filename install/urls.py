@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^index/',views.index),
     url(r'^upload/',views.upload),
     url(r'^download/',views.download),
+    url(r'^(?P<model_id>\d*)',views.model),
 ]
 
 

@@ -17,7 +17,8 @@ def del_host(request):
 def host_list(request,current_page):
     if request.method == "POST":
         checkform=HostsForm(request.POST)
-        checkform["passwd"].value()
+        #checkform["passwd"].value()
+        #print checkform["port"].errors
         if checkform.is_valid():
             passwd=checkform["passwd"].value()
             username=checkform["username"].value()
@@ -32,8 +33,6 @@ def host_list(request,current_page):
                 rc=result["contacted"][ip]["rc"]
             except Exception,e:
                 rc=1
-                
-            print result
             if (rc==0):
                 result=re.findall('{"mem.*}',result["contacted"][ip]["stdout"])[0]
                 res=json.loads(result)
