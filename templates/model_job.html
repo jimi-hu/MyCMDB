@@ -1,54 +1,43 @@
 {% extends 'base.html' %}
 {% block body %}
-  <button class="btn btn-success btn-xs" id="playbook-add" >新增脚本</button>
-   <input  type="file" name="playbook" id="playbook-file-input" style="display:none"/>  
-
-   </br>
-   <input type="submit" class="btn btn-success btn-xs" id="playbook-file-btn" value="上传包"  style="display:none"/>  
-
- <table class="table table-bordered " style="display:none" id="playbook-file-tb" >
-                      <thead>
-                          <tr>
-                            <th style="width: 30px">包名</th>
-                            <th style="width: 30px">大小</th>
-                            <th style="width: 100px">进度</th>
-                            <th style="width:20px"></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td><span  id="playbook-file-name"></span></td>
-                        <td><span  id="playbook-file-size"></span></td>
-                        <td>
-                          <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-success" id="playbook-upload-pro" style="width: 0%"></div>
-                          </div>
-                        </td>
-                      </tr>
-  </table>
-  </br>
-
- <table class="table table-bordered "  id="playbook-file-tb" >
-                      <thead>
-                          <tr>
-                            <th style="width:10px">包名</th>
-                            <th style="width:10px">创建时间</th>
-                            <th style="width:10px">更新时间</th>
-                            <th style="width:10px">操作</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                       {% for model in playbook_list %}
-                      <tr>
-                        <td><span >{{ model.path }}</span></td>
-                        <td><span ></span>{{ model.create_time |date:'Y-m-d H:i'  }}</td>
-                        <td><span ></span>{{ model.update_time |date:'Y-m-d H:i' }}</td>
-                        <td>
-                               <a href="/deploy/1"><span class="label label-primary">执行</span></a>
-                               <a ><span class="label label-danger">删除</span></a>
-                        </td>
-                      </tr>
-                      {% endfor %}
-  </table>
                       
+ <a href="javascript:;" id="show_var_all">
+  编辑配置文件<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+ </a>
+
+<div style="border: 1px solid #ddd;height:500px"  id="editor2_demo2">
+<textarea id="editor_var_all" style="height:500px" rows="20"></textarea>
+<pre id="code_box" style="display:none;height:500px">
+{{ var_all_file_contex }}
+</pre>
+</div>
+
+<textarea style="ols:50;rows:3"></textarea>
+
 {% endblock body  %}
+
+
+{% block js_func %}
+ $("#show_var_all").click(function(){
+   $("#editor2_demo2").toggle();
+
+ });
+
+{% endblock js_func %}
+
+
+{% block js  %}
+
+<script>
+var codeText = $('#code_box').html();
+var editor = CodeMirror.fromTextArea(document.getElementById("editor_var_all"), {
+  lineNumbers: true,
+  mode: "text/html",
+  matchBrackets: true,
+  
+});
+editor.setValue(codeText);
+</script>
+
+
+{% endblock js %}

@@ -1,13 +1,16 @@
+#coding:utf-8
 from django.shortcuts import render, render_to_response
 from install.models import *
 from install.form import installModelsForm
-import os,tarfile
+import os,tarfile,sys
 import shutil
 from MyCMDB.project_dir import PROJECT_DIR 
 from django.http.response import HttpResponse
 import json
 from common import readfile
 from update_job_model import *
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def index(request):
     playbook_list=job_models.objects.all()
@@ -39,7 +42,10 @@ def upload(request):
 
 def model(request,model_id):
     a=job_models.objects.get(id=5)
-    return HttpResponse(a.path)
+    file=os.path.join(a.path,"group_vars/all")
+    f=open(file)
+    var_all_file_contex="".join(f.readlines())
+    return render_to_response("model_job.html",{"var_all_file_contex":var_all_file_contex})
 
 def download(request):
     if request.method == "GET":
