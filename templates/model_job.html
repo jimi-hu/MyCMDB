@@ -5,14 +5,27 @@
   编辑配置文件<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
  </a>
 
-<div style="border: 1px solid #ddd;height:500px"  id="editor2_demo2">
-<textarea id="editor_var_all" style="height:500px" rows="20"></textarea>
-<pre id="code_box" style="display:none;height:500px">
+<div style="border: 1px solid #ddd;"  id="editor2_demo2">
+<textarea id="editor_var_all"  rows="20"></textarea>
+<pre id="code_box" style="display:none;">
 {{ var_all_file_contex }}
 </pre>
 </div>
+</br>
+ <a href="javascript:;" id="show_host_file">
+  编辑host文件<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+ </a>
 
-<textarea style="ols:50;rows:3"></textarea>
+<div style="border: 1px solid #ddd;"  id="editor3_demo3">
+<textarea id="editor_host_file"  rows="20"></textarea>
+<pre id="code_box_host"  style="display:none;">
+{{ host_file_contex }}
+</pre>
+</div>
+
+</br>
+
+<button class="king-btn king-info mb15" data-code="2" id="install_next">执行安装</button>
 
 {% endblock body  %}
 
@@ -23,6 +36,28 @@
 
  });
 
+ $("#install_next").click(function() {
+        var d = dialog({
+            width: 260,
+            title: '提示',
+            content: '确定执行安装操作吗？',
+            okValue: '确定',
+            ok: function() {
+                console.log(arguments)
+                // do something
+            },
+            cancelValue: '取消',
+            cancel: function() {
+                console.log(arguments)
+                // do something
+            },
+            onshow: function() {
+                console.log(arguments)
+                // do something
+            },
+        });
+        d.show();
+    });
 {% endblock js_func %}
 
 
@@ -31,6 +66,15 @@
 <script>
 var codeText = $('#code_box').html();
 var editor = CodeMirror.fromTextArea(document.getElementById("editor_var_all"), {
+  lineNumbers: true,
+  mode: "text/html",
+  matchBrackets: true,
+  
+});
+editor.setValue(codeText);
+
+var codeText = $('#code_box_host').html();
+var editor = CodeMirror.fromTextArea(document.getElementById("editor_host_file"), {
   lineNumbers: true,
   mode: "text/html",
   matchBrackets: true,

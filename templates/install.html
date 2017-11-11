@@ -44,7 +44,7 @@
                         <td><span ></span>{{ model.create_time |date:'Y-m-d H:i'  }}</td>
                         <td><span ></span>{{ model.update_time |date:'Y-m-d H:i' }}</td>
                         <td>
-                               <a href="/deploy/1"><span class="label label-primary">执行</span></a>
+                               <a href="/deploy/{{ model.id }}"><span class="label label-primary">执行</span></a>
                                <a ><span class="label label-danger">删除</span></a>
                         </td>
                       </tr>
